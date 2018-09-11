@@ -55,7 +55,7 @@ void keyPressed() {
     if(keyCode == UP) {
       if(worldMap[(int)(posX + dirX * newMoveSpeed)][(int)(posY)] == 0) posX += dirX * newMoveSpeed;
       if(worldMap[(int)(posX)][(int)(posY + dirY * newMoveSpeed)] == 0) posY += dirY * newMoveSpeed; 
-   
+    }
     
     if(keyCode == DOWN) {
       if(worldMap[(int)(posX - dirX * newMoveSpeed)][(int)(posY)] == 0) posX -= dirX * newMoveSpeed;
@@ -118,7 +118,7 @@ void draw() {
     int stepY = 0;
 
     boolean hit = false;
-    int side;
+    int side = 0;
 
     if (rayDirX < 0) {
       stepX = -1;
@@ -148,12 +148,13 @@ void draw() {
       if (worldMap[mapX][mapY] > 0) {
         hit = true;
       }
-      if(side == 0) {
-       perpWallDist = (mapX - posX + (1 - stepX) / 2) / rayDirX; 
-      }
-      else {
-       perpWallDist = (mapY - posY + (1 - stepY) / 2) / rayDirY;
-      }
+    }
+    
+    if(side == 0) {
+     perpWallDist = (mapX - posX + (1 - stepX) / 2) / rayDirX; 
+    }
+    else {
+     perpWallDist = (mapY - posY + (1 - stepY) / 2) / rayDirY;
     }
     
     int lineHeight = (int)(height / perpWallDist);
